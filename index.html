@@ -31,34 +31,35 @@
     </script>
     <style>
         body {
-            background-color: #f4f6f9;
+            background-color: #0f172a;
+            color: #f8fafc;
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
         }
         /* 卡片紫色上頂邊框 */
         .card-purple-top {
-            border-top: 4px solid #a855f7;
+            border-top: 4px solid #c084fc;
         }
         /* 自訂捲軸風格 */
         .custom-scrollbar::-webkit-scrollbar {
             width: 5px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #1e293b;
             border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: #475569;
             border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: #64748b;
         }
     </style>
 </head>
-<body class="min-h-screen text-slate-800 pb-16">
+<body class="min-h-screen text-slate-100 pb-16 bg-slate-950">
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 pointer-events-none">
+    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 bg-slate-800 border border-slate-700 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 pointer-events-none">
         <i class="fa-solid fa-circle-check text-green-400 text-xl"></i>
         <span id="toast-message" class="text-sm font-medium">複製成功！</span>
     </div>
@@ -66,15 +67,15 @@
     <!-- Header Section -->
     <header class="pt-8 pb-6 px-4 text-center max-w-6xl mx-auto">
         <!-- Title & Google Sheet Link -->
-        <h1 class="text-3xl md:text-4xl font-bold text-slate-900 flex items-center justify-center gap-2 mb-2">
+        <h1 class="text-3xl md:text-4xl font-bold text-white flex items-center justify-center gap-2 mb-2">
             🚀 AI Prompt 智能寶庫
         </h1>
         <div class="flex items-center justify-center gap-2 mb-6">
-            <a href="https://docs.google.com/spreadsheets/d/1EyE8oNZeaYa3QdLma8_oru6ZXWKraoSP8KTLj6qQ3-4/edit?gid=1480282197#gid=1480282197" target="_blank" class="inline-flex items-center text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors bg-white px-3 py-1.5 rounded-full shadow-sm border border-slate-200">
-                <i class="fa-regular fa-file-excel text-emerald-600 mr-2"></i>
+            <a href="https://docs.google.com/spreadsheets/d/1EyE8oNZeaYa3QdLma8_oru6ZXWKraoSP8KTLj6qQ3-4/edit?gid=1480282197#gid=1480282197" target="_blank" class="inline-flex items-center text-xs md:text-sm text-slate-300 hover:text-white transition-colors bg-slate-800/80 hover:bg-slate-800 px-3 py-1.5 rounded-full shadow-sm border border-slate-700">
+                <i class="fa-regular fa-file-excel text-emerald-400 mr-2"></i>
                 開啟原始資料 Google Sheet
             </a>
-            <button onclick="openAddModal()" class="inline-flex items-center text-xs md:text-sm text-white bg-emerald-600 hover:bg-emerald-700 transition-colors px-3 py-1.5 rounded-full shadow-sm font-medium">
+            <button onclick="openAddModal()" class="inline-flex items-center text-xs md:text-sm text-white bg-emerald-600 hover:bg-emerald-500 transition-colors px-3 py-1.5 rounded-full shadow-sm font-medium">
                 <i class="fa-solid fa-plus mr-1"></i> 新增 Prompt
             </button>
         </div>
@@ -85,8 +86,8 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <input type="text" id="searchInput" oninput="handleSearch()" placeholder="搜尋提示詞、標題或內容..." 
-                class="w-full pl-11 pr-10 py-3 rounded-full border border-slate-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-all">
-            <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600">
+                class="w-full pl-11 pr-10 py-3 rounded-full border border-slate-700 bg-slate-900 text-slate-100 shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-all placeholder-slate-500">
+            <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-200">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
@@ -100,14 +101,14 @@
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-4 md:px-6">
         <!-- Live Stats Banner -->
-        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
             <div class="flex items-center space-x-2">
                 <span id="currentCategoryIcon" class="text-2xl">🧠</span>
-                <h2 id="currentCategoryTitle" class="text-xl font-bold text-slate-900">AI 協思</h2>
-                <span id="resultCountBadge" class="bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded-full ml-2">8 個項目</span>
+                <h2 id="currentCategoryTitle" class="text-xl font-bold text-white">AI 協思</h2>
+                <span id="resultCountBadge" class="bg-blue-950 text-blue-300 border border-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full ml-2">8 個項目</span>
             </div>
-            <div class="text-xs text-slate-500">
-                顯示 <span id="showingCount" class="font-bold text-slate-700">0</span> / 全庫 <span id="totalCount" class="font-bold text-slate-700">0</span> 筆提示詞
+            <div class="text-xs text-slate-400">
+                顯示 <span id="showingCount" class="font-bold text-slate-200">0</span> / 全庫 <span id="totalCount" class="font-bold text-slate-200">0</span> 筆提示詞
             </div>
         </div>
 
@@ -118,44 +119,44 @@
 
         <!-- Empty State -->
         <div id="emptyState" class="hidden text-center py-16">
-            <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400 text-2xl">
+            <div class="w-16 h-16 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-500 text-2xl">
                 <i class="fa-solid fa-folder-open"></i>
             </div>
-            <h3 class="text-lg font-medium text-slate-700 mb-1">沒有符合條件的提示詞</h3>
+            <h3 class="text-lg font-medium text-slate-300 mb-1">沒有符合條件的提示詞</h3>
             <p class="text-slate-500 text-sm">請嘗試修改關鍵字或選擇其他分類標籤。</p>
-            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition">重置篩選條</button>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-500 transition">重置篩選條</button>
         </div>
     </main>
 
     <!-- Modal for Adding New Prompt -->
-    <div id="addModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl transform transition-all">
-            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
-                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-sparkles text-amber-500"></i> 新增 AI 提示詞
+    <div id="addModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl transform transition-all text-slate-100">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-800">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sparkles text-amber-400"></i> 新增 AI 提示詞
                 </h3>
-                <button onclick="closeAddModal()" class="text-slate-400 hover:text-slate-600 p-1">
+                <button onclick="closeAddModal()" class="text-slate-400 hover:text-slate-200 p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
             <form id="addPromptForm" onsubmit="saveNewPrompt(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">分類標籤</label>
-                    <select id="modalCategory" required class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">分類標籤</label>
+                    <select id="modalCategory" required class="w-full border border-slate-700 bg-slate-800 text-white rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                         <!-- JS populated options -->
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">標題</label>
-                    <input type="text" id="modalTitle" required placeholder="例如：書籍精煉、產品命名..." class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">標題</label>
+                    <input type="text" id="modalTitle" required placeholder="例如：書籍精煉、產品命名..." class="w-full border border-slate-700 bg-slate-800 text-white rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Prompt 提示詞內容</label>
-                    <textarea id="modalContent" required rows="6" placeholder="請輸入 Prompt 內容指令..." class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none custom-scrollbar"></textarea>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Prompt 提示詞內容</label>
+                    <textarea id="modalContent" required rows="6" placeholder="請輸入 Prompt 內容指令..." class="w-full border border-slate-700 bg-slate-800 text-white rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none custom-scrollbar placeholder-slate-500"></textarea>
                 </div>
                 <div class="flex justify-end space-x-3 pt-3">
-                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 border border-slate-200 text-slate-600 text-sm rounded-lg hover:bg-slate-50 transition">取消</button>
-                    <button type="submit" class="px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition shadow-sm">確認儲存</button>
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 border border-slate-700 text-slate-300 text-sm rounded-lg hover:bg-slate-800 transition">取消</button>
+                    <button type="submit" class="px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-500 transition shadow-sm">確認儲存</button>
                 </div>
             </form>
         </div>
@@ -294,7 +295,6 @@
             container.innerHTML = '';
 
             categories.forEach(cat => {
-                // 計算各分類符合搜尋條件的連動數量
                 let count = 0;
                 if (cat === "全部") {
                     count = prompts.filter(p => matchesSearch(p)).length;
@@ -306,16 +306,15 @@
                 const btn = document.createElement('button');
                 btn.onclick = () => selectCategory(cat);
                 
-                // 動態樣式
                 btn.className = `px-4 py-1.5 rounded-full text-xs md:text-sm font-medium transition-all duration-200 border flex items-center gap-1.5 ${
                     isActive 
-                        ? 'bg-blue-600 text-white border-blue-600 shadow-md transform scale-105' 
-                        : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                        ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/30 transform scale-105' 
+                        : 'bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800 hover:text-white'
                 }`;
 
                 btn.innerHTML = `
                     <span>${cat}</span>
-                    <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-white/30 text-white' : 'bg-slate-100 text-slate-500'}">${count}</span>
+                    <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400'}">${count}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -371,13 +370,11 @@
             const emptyState = document.getElementById('emptyState');
             grid.innerHTML = '';
 
-            // 根據 分類 與 搜尋過濾
             const filtered = prompts.filter(p => {
                 const matchesCat = currentCategory === "全部" || p.category === currentCategory;
                 return matchesCat && matchesSearch(p);
             });
 
-            // 更新數值連動資訊
             document.getElementById('resultCountBadge').innerText = `${filtered.length} 個項目`;
             document.getElementById('showingCount').innerText = filtered.length;
             document.getElementById('totalCount').innerText = prompts.length;
@@ -389,34 +386,34 @@
                 
                 filtered.forEach(p => {
                     const card = document.createElement('div');
-                    card.className = "bg-white rounded-2xl shadow-sm border border-slate-100 card-purple-top p-5 flex flex-col justify-between hover:shadow-md transition-shadow duration-300 relative group";
+                    card.className = "bg-slate-900/90 rounded-2xl shadow-lg border border-slate-800 card-purple-top p-5 flex flex-col justify-between hover:border-slate-700 transition-all duration-300 relative group";
                     
                     card.innerHTML = `
                         <div>
                             <!-- Tag Header -->
                             <div class="mb-2 flex items-center justify-between">
-                                <span class="text-[11px] font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
+                                <span class="text-[11px] font-semibold text-blue-400 bg-blue-950/80 border border-blue-900/50 px-2.5 py-1 rounded-md">
                                     ${escapeHtml(p.category)}
                                 </span>
-                                <button onclick="deletePrompt(${p.id})" class="opacity-0 group-hover:opacity-100 text-slate-300 hover:text-red-500 transition-opacity text-xs" title="刪除此提示詞">
+                                <button onclick="deletePrompt(${p.id})" class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-red-400 transition-opacity text-xs" title="刪除此提示詞">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-lg font-bold text-slate-900 mb-3 leading-snug">
+                            <h3 class="text-lg font-bold text-white mb-3 leading-snug">
                                 ${escapeHtml(p.title)}
                             </h3>
 
                             <!-- Content Area -->
-                            <div class="bg-slate-50/80 rounded-xl p-3 text-xs md:text-sm text-slate-600 leading-relaxed mb-4 max-h-48 overflow-y-auto custom-scrollbar border border-slate-100 whitespace-pre-wrap font-sans">
+                            <div class="bg-slate-950/70 rounded-xl p-3 text-xs md:text-sm text-slate-300 leading-relaxed mb-4 max-h-48 overflow-y-auto custom-scrollbar border border-slate-800/80 whitespace-pre-wrap font-sans">
 ${escapeHtml(p.content)}
                             </div>
                         </div>
 
                         <!-- Action Button -->
                         <button onclick="copyPrompt(\`${escapeJsString(p.content)}\`)" 
-                            class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium text-sm rounded-xl transition-colors duration-150 flex items-center justify-center space-x-2 shadow-sm">
+                            class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-medium text-sm rounded-xl transition-colors duration-150 flex items-center justify-center space-x-2 shadow-sm">
                             <i class="fa-regular fa-copy"></i>
                             <span>複製 Prompt</span>
                         </button>
